@@ -1,9 +1,7 @@
-@props(['messages'])
+@props(['for', 'keyForm' => null])
 
-@if ($messages)
-    <ul {{ $attributes->merge(['class' => 'text-sm text-red-600 space-y-1']) }}>
-        @foreach ((array) $messages as $message)
-            <li>{{ $message }}</li>
-        @endforeach
-    </ul>
-@endif
+@error($for, $keyForm)
+    <span {{ $attributes->merge(['class' => 'invalid-feedback d-block']) }} role="alert">
+        {{ $message }}
+    </span>
+@enderror

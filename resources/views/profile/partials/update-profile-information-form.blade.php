@@ -1,32 +1,41 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
+<x-form-section method="POST" action="{{ route('profile.update') }}">
+    <x-slot name="title">
+        {{ __('Profile Information') }}
+    </x-slot>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
+    <x-slot name="description">
+        {{ __('Update your account\'s profile information and email address.') }}
+    </x-slot>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    <form
+        id="send-verification"
+        class="d-none"
+        method="post"
+        action="{{ route('verification.send') }}"
+    >
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <x-slot name="alert">
+        @if (session('status') === 'profile-updated')
+            <x-alert type="success" message="{{ __('profile.edit.alert') }}" />
+        @endif
+    </x-slot>
+
+    <x-slot name="form">
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <div class="mt-2">
+            <x-label for="name" :value="__('Name')" />
+            <x-input id="name" name="name" type="text" class="mt-1 block w-full {{ $errors->has('name') ? 'is-invalid' : '' }}" :value="old('name', $user->name)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" for="name" />
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <div class="mt-2">
+            <x-label for="email" :value="__('Email')" />
+            <x-input id="email" name="email" type="email" class="mt-1 block w-full {{ $errors->has('email') ? 'is-invalid' : '' }}" :value="old('email', $user->email)" autocomplete="username" />
+            <x-input-error class="mt-2" for="email" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
@@ -46,19 +55,13 @@
                 </div>
             @endif
         </div>
+    </x-slot>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+    <x-slot name="actions">
+        <x-button>{{ __('Save') }}</x-button>
 
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
-</section>
+        {{-- @if (session('status') === 'profile-updated')
+            <span class="m-1 fade-out">{{ __('Saved.') }}</span>
+        @endif --}}
+    </x-slot>
+</x-form-section>
