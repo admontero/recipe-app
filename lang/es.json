@@ -152,5 +152,6 @@
     "Edit" : "Editar",
     "Restore" : "Restaurar",
     "Actions" : "Acciones",
-    "Deleted": "Borrada"
+    "Deleted": "Borrada",
+    "Is Admin?": "¿Es Admin?"
 }

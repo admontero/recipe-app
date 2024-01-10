@@ -16,6 +16,10 @@
                 </x-nav-link>
 
                 @admin
+                    <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                        {{ __('user.module') }}
+                    </x-nav-link>
+
                     <x-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
                         {{ __('category.module') }}
                     </x-nav-link>

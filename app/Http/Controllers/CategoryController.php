@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Category\DeleteCategoryAction;
+use App\Actions\Category\RestoreCategoryAction;
 use App\Actions\Category\UpsertCategoryAction;
 use App\DataTransferObjects\CategoryData;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -35,13 +37,14 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request, UpsertCategoryAction $upsertCategoryAction)
+    public function store(CategoryRequest $request, UpsertCategoryAction $upsertCategoryAction): RedirectResponse
     {
+        $this->authorize('create', Category::class);
+
         $upsertCategoryAction->handle(CategoryData::fromRequest($request));
 
-        return redirect()
-            ->route('categories.index')
-            ->with('status', 'saved');
+        return Redirect::route('categories.index')
+            ->with('status', 'category.success.saved');
     }
 
     /**
@@ -63,40 +66,39 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, Category $category, UpsertCategoryAction $upsertCategoryAction): RedirectResponse | Redirector
+    public function update(CategoryRequest $request, Category $category, UpsertCategoryAction $upsertCategoryAction): RedirectResponse
     {
+        $this->authorize('update', $category);
+
         $upsertCategoryAction->handle(CategoryData::fromRequest($request), $category);
 
-        return redirect()
-            ->route('categories.index')
-            ->with('status', 'saved');
+        return Redirect::route('categories.index')
+            ->with('status', 'category.success.saved');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category): RedirectResponse | Redirector
+    public function destroy(Category $category, DeleteCategoryAction $deleteCategoryAction): RedirectResponse
     {
-        abort_if(! auth()->user()?->isAdmin(), 403);
+        $this->authorize('delete', $category);
 
-        $category->delete();
+        $deleteCategoryAction->handle($category);
 
-        return redirect()
-            ->route('categories.index')
-            ->with('status', 'deleted');
+        return Redirect::route('categories.index')
+            ->with('status', 'category.success.deleted');
     }
 
     /**
      * Restore the specified resource from storage.
      */
-    public function restore(int $id): RedirectResponse | Redirector
+    public function restore(int $id, RestoreCategoryAction $restoreCategoryAction): RedirectResponse
     {
-        abort_if(! auth()->user()?->isAdmin(), 403);
+        $this->authorize('restore', new Category());
 
-        Category::where('id', $id)->withTrashed()->restore();
+        $restoreCategoryAction->handle($id);
 
-        return redirect()
-            ->route('categories.index')
-            ->with('status', 'restored');
+        return Redirect::route('categories.index')
+            ->with('status', 'category.success.restored');
     }
 }

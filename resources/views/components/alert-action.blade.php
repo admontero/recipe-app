@@ -1,7 +1,5 @@
-@props(['type' => 'success', 'model' => 'resource'])
-
 @php
-    $alert = match ($type) {
+    $alert = match (explode('.', session('status'))[1] ?? '') {
         'success' => [
             'classes' => 'alert-success',
             'icon' => 'check-circle-fill',
@@ -30,20 +28,11 @@
     }
 @endphp
 
-@php
-    $message = match (session('status')) {
-        'saved', 'updated' => __('messages.saved', ['resource' => __("{$model}.resource")]),
-        'deleted' => __('messages.deleted', ['resource' => __("{$model}.resource")]),
-        'restored' => __('messages.restored', ['resource' => __("{$model}.resource")]),
-        default => __('messages.saved', ['resource' => __("{$model}.resource")]),
-    }
-@endphp
-
 <div>
     <div {{ $attributes->merge(['class' => "alert {$alert['classes']} alert-dismissible fade show d-flex align-items-center"]) }}>
         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="{{ $alert['color'] ?? '' }}"><use xlink:href="#{{ $alert['icon'] ?? '' }}"></use></svg>
         <div>
-            <span class="m-1 fade-out">{{ $message }}</span>
+            <span class="m-1 fade-out">{{ __(session('status')) }}</span>
         </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

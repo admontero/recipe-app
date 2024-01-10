@@ -31,6 +31,12 @@ return [
     'restore' => [
         'description' => 'Are you sure you want to restore the category?',
         'action' => 'Restore Category',
+    ],
+
+    'success' => [
+        'saved' => 'The category has been deleted succesfully.',
+        'deleted' => 'The category has been deleted succesfully.',
+        'restored' => 'The category has been restored succesfully.',
     ]
 
 ];

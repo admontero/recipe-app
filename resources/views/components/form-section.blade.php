@@ -15,7 +15,7 @@
         {{ $alert }}
         <div class="card shadow-sm">
             <form method="{{ $method }}" action="{{ $action }}">
-                <div class="card-body">
+                <div class="card-body row g-3 px-md-4 py-4">
                     {{ $form }}
                 </div>
 

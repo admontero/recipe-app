@@ -22,8 +22,8 @@
         </x-slot>
 
         <x-slot name="alert">
-            @if (in_array(session('status'), ['saved', 'deleted', 'restored']))
-                <x-alert-action type="success" model="category" />
+            @if (session('status'))
+                <x-alert-action />
             @endif
         </x-slot>
 
@@ -50,12 +50,12 @@
                                 @endif
                             </td>
                             <td>{{ $category->slug }}</td>
-                            <td class="text-start">
-                                <div class="btn-group">
-                                    <x-button type="submit" class="btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <td class="">
+                                <div class="btn-group dropend">
+                                    <x-button type="submit" id="dropdownButton" class="btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                         {{ __('Actions') }}
                                     </x-button>
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu position-fixed">
                                         @if (! $category->trashed())
                                             <li>
                                                 <a class="dropdown-item" href="{{ route('categories.edit', $category) }}">{{ __('Edit') }}</a>

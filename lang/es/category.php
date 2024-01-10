@@ -31,6 +31,12 @@ return [
     'restore' => [
         'description' => '¿Está seguro de que desea restaurar la categoría?',
         'action' => 'Restaurar Categoría',
-    ]
+    ],
+
+    'success' => [
+        'saved' => 'La categoría se ha guardado correctamente.',
+        'deleted' => 'La categoría se ha eliminado correctamente.',
+        'restored' => 'La categoría se ha restaurado correctamente.',
+    ],
 
 ];

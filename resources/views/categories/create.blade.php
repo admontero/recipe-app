@@ -25,7 +25,7 @@
         <x-slot name="form">
             @csrf
 
-            <div class="mb-3">
+            <div class="col-md-6 mb-3">
                 <x-label value="{{ __('Name') }}" />
 
                 <x-input
