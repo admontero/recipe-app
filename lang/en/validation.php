@@ -173,6 +173,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'tags.*' => [
+            'min' => 'The #:position tag must contain at least :min characters.',
+            'max' => 'The #:position tag must not contain more than :max characters.',
+        ],
     ],
 
     /*
@@ -186,6 +190,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'tags.*' => '#:position tag'
+    ],
 
 ];

@@ -153,5 +153,16 @@
     "Restore" : "Restaurar",
     "Actions" : "Acciones",
     "Deleted": "Borrada",
-    "Is Admin?": "¿Es Admin?"
+    "Is Admin?": "¿Es Admin?",
+    "Category": "Categoría",
+    "Publication Date": "Fecha de Publicación",
+    "Title": "Título",
+    "Excerpt": "Extracto",
+    "Tags": "Etiquetas",
+    "Description": "Descripción",
+    "Ingredients": "Ingredientes",
+    "Preparation": "Preparación",
+    "Image": "Imagen",
+    "Remember Me": "Recuérdame",
+    "Published": "Publicado"
 }

@@ -24,6 +24,10 @@
                         {{ __('category.module') }}
                     </x-nav-link>
                 @endadmin
+
+                <x-nav-link href="{{ route('recipes.index') }}" :active="request()->routeIs('recipes.index')">
+                    {{ __('recipe.module') }}
+                </x-nav-link>
             </ul>
 
             <!-- Right Side Of Navbar -->

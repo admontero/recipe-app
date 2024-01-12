@@ -44,6 +44,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
+    public function recipes()
+    {
+        return $this->hasMany(Recipe::class);
+    }
+
     public function isAdmin(): bool
     {
         return (bool) $this->is_admin;

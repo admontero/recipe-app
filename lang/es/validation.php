@@ -151,6 +151,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'tags.*' => [
+            'min' => 'La etiqueta #:position debe contener al menos :min caracteres.',
+            'max' => 'La etiqueta #:position no debe contener más de :max caracteres.',
+        ]
     ],
 
     /*
@@ -169,6 +173,16 @@ return [
         'name' => 'nombre',
         'password' => 'contraseña',
         'current_password' => 'contraseña actual',
+        'title' => 'título',
+        'excerpt' => 'extracto',
+        'category_id' => 'categoría',
+        'tags' => 'etiquetas',
+        'description' => 'descripción',
+        'ingredients' => 'ingredientes',
+        'preparation' => 'preparación',
+        'image' => 'imagen',
+        'published_at' => 'fecha de publicación',
+        'tags.*' => 'etiqueta #:position'
     ],
 
 ];

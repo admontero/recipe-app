@@ -1,4 +1,4 @@
-@props(['method', 'action', 'alert' => null])
+@props(['method', 'action', 'id' => null, 'enctype' => null, 'alert' => null])
 
 <div {{ $attributes->merge(['class' => 'row']) }}>
     <div class="col-md-4">
@@ -14,7 +14,7 @@
     <div class="col-md-8">
         {{ $alert }}
         <div class="card shadow-sm">
-            <form method="{{ $method }}" action="{{ $action }}">
+            <form method="{{ $method }}" action="{{ $action }}" id="{{ $id }}" enctype="{{ $enctype }}">
                 <div class="card-body row g-3 px-md-4 py-4">
                     {{ $form }}
                 </div>

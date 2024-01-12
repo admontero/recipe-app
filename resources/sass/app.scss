@@ -4,3 +4,33 @@
 
 @import 'node_modules/bootstrap/scss/bootstrap';
 
+@import 'node_modules/tom-select/dist/css/tom-select.bootstrap5';
+
+@import 'node_modules/quill/dist/quill.core';
+
+@import 'node_modules/quill/dist/quill.snow';
+
+@import 'node_modules/flatpickr/dist/flatpickr';
+
+@import 'node_modules/flatpickr/dist/themes/airbnb';
+
+.quill-editor {
+    border-bottom-left-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+    min-height: 12rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.quill-editor .ql-editor.ql-blank {
+    flex-grow: 1;
+}
+
+.ql-toolbar.ql-snow {
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+}
+
+.has-error {
+    border: 1px solid red;
+}
