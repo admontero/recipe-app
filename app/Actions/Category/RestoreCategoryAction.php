@@ -6,8 +6,8 @@ use App\Models\Category;
 
 class RestoreCategoryAction
 {
-    public function handle(int $id): void
+    public function handle(string $slug): void
     {
-        Category::where('id', $id)->withTrashed()->restore();
+        Category::where('slug', $slug)->withTrashed()->restore();
     }
 }

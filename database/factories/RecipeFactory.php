@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,23 @@ class RecipeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->word(),
+            'excerpt' => fake()->text(500),
+            'description' => fake()->realText(),
+            'ingredients' => fake()->realText(),
+            'preparation' => fake()->realText(),
+            'user_id' => User::factory(),
+            'category_id' => Category::factory(),
+            'image' => 'recipes/' . fake()->image('public/storage/recipes/', 400, 300, 'recipes', false, true, 'food', true),
+            'published_at' => fake()->dateTimeThisMonth(),
         ];
+    }
+
+    public function existing(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'user_id' => rand(1, 2),
+            'category_id' => rand(1, 6),
+        ]);
     }
 }

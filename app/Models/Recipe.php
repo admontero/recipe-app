@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
+use App\Builders\RecipeBuilder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
 class Recipe extends Model
 {
+    use HasEagerLimit;
     use HasFactory;
     use HasSlug;
 
@@ -50,20 +56,39 @@ class Recipe extends Model
         return 'slug';
     }
 
-    public function category()
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => asset('storage/' . $this->image),
+        );
+    }
+
+    protected function publishDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->published_at->isoFormat('LLL'),
+        );
+    }
+
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function tags()
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'recipe_tag', 'recipe_id', 'tag_id')
             ->withTimestamps();
+    }
+
+    public function newEloquentBuilder($query): RecipeBuilder
+    {
+        return new RecipeBuilder($query);
     }
 
     public function isPublished(): bool

@@ -11,22 +11,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                {{-- <x-nav-link href="{{ route('back.dashboard') }}" :active="request()->routeIs('dashboard')">
                     {{ __('Dashboard') }}
-                </x-nav-link>
+                </x-nav-link> --}}
 
                 @admin
-                    <x-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
-                        {{ __('user.module') }}
+                    <x-nav-link href="{{ route('back.users.index') }}" :active="request()->routeIs('back.users.index')">
+                        {{ __('modules.user.plural') }}
                     </x-nav-link>
 
-                    <x-nav-link href="{{ route('categories.index') }}" :active="request()->routeIs('categories.index')">
-                        {{ __('category.module') }}
+                    <x-nav-link href="{{ route('back.categories.index') }}" :active="request()->routeIs('back.categories.index')">
+                        {{ __('modules.category.plural') }}
                     </x-nav-link>
                 @endadmin
 
-                <x-nav-link href="{{ route('recipes.index') }}" :active="request()->routeIs('recipes.index')">
-                    {{ __('recipe.module') }}
+                <x-nav-link href="{{ route('back.recipes.index') }}" :active="request()->routeIs('back.recipes.index')">
+                    {{ __('modules.recipe.plural') }}
                 </x-nav-link>
             </ul>
 
@@ -49,7 +49,7 @@
                                 {{ __('Manage Account') }}
                             </h6>
 
-                            <x-dropdown-link href="{{ route('profile.edit') }}">
+                            <x-dropdown-link href="{{ route('back.profile.edit') }}">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 

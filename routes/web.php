@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Back\CategoryController;
+use App\Http\Controllers\Back\ProfileController;
+use App\Http\Controllers\Back\RecipeController;
+use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RecipeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\RecipeCategoryController;
+use App\Http\Controllers\RecipeController as RecipeFrontController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,15 +20,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('back.dashboard');
+})->middleware(['auth', 'verified'])->name('back.dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::name('back.')->prefix('back')->middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
 
@@ -36,15 +34,24 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 
-    Route::resource('recipes', RecipeController::class);
+    Route::resource('recipes', RecipeController::class)->except('show');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::resource('categories', CategoryController::class);
+Route::name('back.')->prefix('back')->middleware(['auth', 'admin'])->group(function () {
+    Route::resource('categories', CategoryController::class)->except('show');
+
     Route::post('categories/{id}/restore', [CategoryController::class, 'restore'])
         ->name('categories.restore');
 
     Route::resource('users', UserController::class);
 });
 
+Route::get('/', PageController::class);
+
+Route::get('recipes/{recipe}', RecipeFrontController::class)->name('recipes.show');
+
+Route::get('categories/{category}/recipes', RecipeCategoryController::class)->name('recipes.category.show');
+
 require __DIR__.'/auth.php';
+
+Route::fallback(function () { return abort(404); });

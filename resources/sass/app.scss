@@ -34,3 +34,10 @@
 .has-error {
     border: 1px solid red;
 }
+
+.line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}

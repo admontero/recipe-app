@@ -1,5 +1,5 @@
 @php
-    $alert = match (explode('.', session('status'))[1] ?? '') {
+    $alert = match (explode('.', session('status'))[2] ?? '') {
         'success' => [
             'classes' => 'alert-success',
             'icon' => 'check-circle-fill',

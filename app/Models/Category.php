@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Staudenmeir\EloquentEagerLimit\HasEagerLimit;
 
 class Category extends Model
 {
+    use HasEagerLimit;
     use HasFactory;
     use HasSlug;
     use SoftDeletes;
@@ -26,6 +28,11 @@ class Category extends Model
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug')
             ->doNotGenerateSlugsOnUpdate();
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 
     protected function name(): Attribute

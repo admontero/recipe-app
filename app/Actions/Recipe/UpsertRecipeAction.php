@@ -151,7 +151,7 @@ class UpsertRecipeAction
 
             $classAttribute = $dom->createAttribute('class');
 
-            $classAttribute->value = 'img-fluid rounded';
+            $classAttribute->value = 'img-fluid rounded d-block mx-auto';
 
             $element->appendChild($classAttribute);
 

@@ -33,9 +33,9 @@ class RecipeRequest extends FormRequest
                 'max:2048'
             ],
             'category_id' => 'required|numeric|exists:categories,id',
-            'tags' => 'required|array|min:1|max:5',
+            'tags' => 'required|array|min:1|max:10',
             'tags.*' => ['max:20', new MinIfIsString],
-            'excerpt' => 'required|string|min:5|max:250',
+            'excerpt' => 'required|string|min:5|max:1000',
             'description' => 'required',
             'ingredients' => 'required',
             'preparation' => 'required',
