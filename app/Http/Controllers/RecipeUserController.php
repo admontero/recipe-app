@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Recipe;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class RecipeCategoryController extends Controller
+class RecipeUserController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, Category $category)
+    public function __invoke(Request $request, User $user)
     {
         $recipes = Recipe::select('id', 'title', 'slug', 'excerpt', 'image', 'published_at', 'category_id', 'user_id')
-            ->with('tags:id,name,slug', 'user:id,name')
+            ->with('tags:id,name,slug', 'user:id,name', 'category:id,name,slug')
             ->has('category')
-            ->where('category_id', $category->id)
+            ->where('user_id', $user->id)
             ->published()
             ->latest('published_at')
             ->paginate(10);
 
-        return view('recipes.category-show', [
-            'category' => $category,
+        return view('recipes.user-show', [
+            'user' => $user,
             'recipes' => $recipes,
         ]);
     }

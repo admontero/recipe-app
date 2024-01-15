@@ -7,6 +7,9 @@ use App\Http\Controllers\Back\UserController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RecipeCategoryController;
 use App\Http\Controllers\RecipeController as RecipeFrontController;
+use App\Http\Controllers\RecipeSearchController;
+use App\Http\Controllers\RecipeTagController;
+use App\Http\Controllers\RecipeUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,9 +51,15 @@ Route::name('back.')->prefix('back')->middleware(['auth', 'admin'])->group(funct
 
 Route::get('/', PageController::class);
 
+Route::get('recipes/search', RecipeSearchController::class)->name('recipes.search');
+
 Route::get('recipes/{recipe}', RecipeFrontController::class)->name('recipes.show');
 
 Route::get('categories/{category}/recipes', RecipeCategoryController::class)->name('recipes.category.show');
+
+Route::get('tags/{tag}/recipes', RecipeTagController::class)->name('recipes.tag.show');
+
+Route::get('users/{user}/recipes', RecipeUserController::class)->name('recipes.user.show');
 
 require __DIR__.'/auth.php';
 

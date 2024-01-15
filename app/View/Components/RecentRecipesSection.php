@@ -22,8 +22,8 @@ class RecentRecipesSection extends Component
      */
     public function render(): View|Closure|string
     {
-        $recipes = Recipe::select('id', 'title', 'slug', 'excerpt', 'image', 'published_at', 'user_id')
-            ->with('tags:id,name,slug', 'user:id,name')
+        $recipes = Recipe::select('id', 'title', 'slug', 'excerpt', 'image', 'published_at', 'user_id', 'category_id')
+            ->with('tags:id,name,slug', 'user:id,name', 'category:id,name,slug')
             ->has('category')
             ->published()
             ->latest('published_at')

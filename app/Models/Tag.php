@@ -26,6 +26,11 @@ class Tag extends Model
             ->doNotGenerateSlugsOnUpdate();
     }
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     protected function name(): Attribute
     {
         return Attribute::make(

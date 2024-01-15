@@ -2,7 +2,7 @@
     <div class="album">
         <div class="row">
             <div class="col-lg-8">
-                <h3 class="mb-4">{{ __('front.recipes.category-show.title') }}: <span class="text-success">{{ $category->name }}</span></h3>
+                <h3 class="mb-4">{{ __('front.recipes.tag-show.title') }}: <span class="text-success text-capitalize">{{ $tag->name }}</span></h3>
 
                 <hr>
 
@@ -33,7 +33,7 @@
                     </div>
                 @else
                     <div class="fst-italic text-muted text-center">
-                        <p>{{ __('front.recipes.category-show.empty') }}</p>
+                        <p>{{ __('front.recipes.tag-show.empty') }}</p>
                     </div>
                 @endif
 

@@ -16,7 +16,11 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between small mb-1">
                                 <p class="text-black-50">{{ $recipe->published_at->diffForHumans() }}</p>
-                                <p class="fw-bold bg-body-secondary px-2 rounded">{{ $recipe->user->name }}</p>
+                                <p class="fw-bold bg-body-secondary px-2 rounded">
+                                    <a class="text-dark text-decoration-none" href="{{ route('recipes.user.show', $recipe->user) }}">
+                                        {{ $recipe->user->name }}
+                                    </a>
+                                </p>
                             </div>
                             <h5 class="card-title">{{ $recipe->title }}</h5>
                             <p class="card-text line-clamp-3 text-muted">{{ $recipe->excerpt }}</p>

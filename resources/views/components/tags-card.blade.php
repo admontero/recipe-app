@@ -5,7 +5,7 @@
 
     <div>
         @forelse ($tags as $tag)
-            <a href="#" class="text-success text-capitalize me-2">
+            <a href="{{ route('recipes.tag.show', $tag) }}" class="text-success text-capitalize me-2">
                 {{ $tag->name }}
             </a>
         @empty

@@ -15,14 +15,18 @@
 
                 <span>
                     <span class="fw-bold">{{ __('Author') }}:</span>
-                    {{ $recipe->user->name }}
+                    <a class="text-success" href="{{ route('recipes.user.show', $recipe->user) }}">
+                        {{ $recipe->user->name }}
+                    </a>
                 </span>
 
                 <span class="mx-2 fs-4 fw-bold text-success">&middot</span>
 
                 <span>
                     <span class="fw-bold">{{ __('Category') }}:</span>
-                    {{ $recipe->category->name }}
+                    <a class="text-success" href="{{ route('recipes.user.show', $recipe->user) }}">
+                        {{ $recipe->category->name }}
+                    </a>
                 </span>
             </div>
 

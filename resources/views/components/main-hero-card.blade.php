@@ -1,5 +1,5 @@
 <div class="container col-xxl-8 px-4 py-2 rounded mt-lg-5 bg-white shadow">
-    <form>
+    <form action="{{ route('recipes.search') }}">
         <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6 mx-auto mb-4 mb-lg-0">
                 <img src="{{ asset('./images/hamburger.jpg') }}" class="d-block img-fluid rounded" alt="Bootstrap Themes" loading="lazy">
@@ -14,20 +14,36 @@
                 </p>
 
                 <div class="col-md-8 mx-auto mb-2">
-                    <select id="selectCategory" autocomplete="off" name="category_id">
+                    <x-input
+                        class="{{ $errors->get('title') ? 'is-invalid' : '' }}"
+                        type="search"
+                        name="title"
+                        id="title"
+                        value="{{ old('title') }}"
+                        placeholder="{{ __('front.components.main-hero-card.input') }}"
+                    />
+
+                    <x-input-error for="title"></x-input-error>
+                </div>
+
+                <div class="col-md-8 mx-auto mb-2">
+                    <select id="selectCategory" autocomplete="off" name="slug">
                         <option value="">{{ __('front.components.main-hero-card.select') }}</option>
                         @foreach ($categories as $category)
                             <option
-                                value="{{ $category->id }}"
-                                @selected(old('category_id') == $category->id)
+                                value="{{ $category->slug }}"
+                                @selected(old('slug') == $category->slug)
                             >{{ $category->name }}</option>
                         @endforeach
                     </select>
+
+                    <x-input-error for="slug"></x-input-error>
                 </div>
 
                 <div class="col-md-8 mx-auto">
-                    <x-input type="search" name="title" id="title" placeholder="{{ __('front.components.main-hero-card.input') }}" />
-                    <x-input-error for="title"></x-input-error>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" type="submit">{{ __('front.components.main-hero-card.button') }}</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,7 +61,7 @@
                 }
             });
 
-            if (@json($errors->has('category_id'))) {
+            if (@json($errors->has('slug'))) {
                 tomSelectCategory.control.classList.add('has-error')
             } else {
                 tomSelectCategory.control.classList.remove('has-error')

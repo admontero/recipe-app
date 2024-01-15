@@ -2,7 +2,12 @@
     <div class="album">
         <div class="row">
             <div class="col-lg-8">
-                <h3 class="mb-4">{{ __('front.recipes.category-show.title') }}: <span class="text-success">{{ $category->name }}</span></h3>
+                <h3 class="mb-4">
+                    {{ __('front.recipes.search-show.title') }}:
+                    <span class="text-success">
+                        {{ request()->title }}
+                    </span>
+                </h3>
 
                 <hr>
 
@@ -11,9 +16,24 @@
                         @foreach ($recipes as $recipe)
                             <div class="col mb-4">
                                 <div class="card h-100  shadow-sm">
-                                    <a href="{{ route('recipes.show', $recipe) }}">
-                                        <img class="bd-placeholder-img card-img-top" src="{{ $recipe->image_url }}" />
-                                    </a>
+                                    @if (request()->slug)
+                                        <a href="{{ route('recipes.show', $recipe) }}">
+                                            <img class="bd-placeholder-img card-img-top" src="{{ $recipe->image_url }}" />
+                                        </a>
+                                    @else
+                                        <div class="position-relative">
+                                            <a href="{{ route('recipes.show', $recipe) }}">
+                                                <img class="bd-placeholder-img card-img-top" src="{{ $recipe->image_url }}" />
+                                            </a>
+                                            <div class="position-absolute" style="top: .5rem; left: .5rem;">
+                                                <a href="{{ route('recipes.category.show', $recipe->category) }}">
+                                                    <span class="badge bg-success fw-light">
+                                                        {{ $recipe->category->name }}
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endif
 
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between small mb-1">
@@ -33,7 +53,7 @@
                     </div>
                 @else
                     <div class="fst-italic text-muted text-center">
-                        <p>{{ __('front.recipes.category-show.empty') }}</p>
+                        <p>{{ __('front.recipes.search-show.empty') }}</p>
                     </div>
                 @endif
 

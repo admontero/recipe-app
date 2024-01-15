@@ -16,7 +16,20 @@ return [
         ],
         'category-show' => [
             'title' => 'Recetas con la categoría',
-        ]
+            'empty' => 'Parece que esta categoría aún no tiene recetas publicadas, atrévete a ser el primero en hacerlo, ¡quizá seas un gran chef!',
+        ],
+        'tag-show' => [
+            'title' => 'Recetas con la etiqueta',
+            'empty' => 'Parece que esta etiqueta aún no tiene recetas publicadas, atrévete a ser el primero en hacerlo, ¡quizá seas un gran chef!',
+        ],
+        'user-show' => [
+            'title' => 'Recetas del usuario',
+            'empty' => 'Parece que no hay recetas publicadas por este usuario, inténtelo más tarde o pruebe con otro usuario.',
+        ],
+        'search-show' => [
+            'title' => 'Recetas con el término',
+            'empty' => 'Parece que no hay resultados para su búsqueda, por favor intente con otro término.',
+        ],
     ],
 
     'components' => [
@@ -26,6 +39,7 @@ return [
             'subtitle-2' => 'Sorprende a tu familia, amigos e invitados con uno de los platos publicados, de seguro quedarán satisfechos.',
             'select' => 'Selecciona una categoría...',
             'input' => '¿Qué quieres cocinar hoy?',
+            'button' => 'Buscar Receta',
         ],
         'categories-recipes-section' => [
             'anchor' => 'Mostrar Más'
@@ -39,14 +53,12 @@ return [
         ],
         'recipe-search-card' => [
             'title' => 'Búsqueda de Recetas',
-            'input' => 'Buscar Receta...',
+            'input' => 'Escribe el nombre de alguna receta...',
+            'button' => 'Buscar',
         ],
         'categories-card' => [
             'title' => 'Categorías',
             'empty' => 'No hay categorías con recetas publicadas.',
-        ],
-        'recipes-empty-alert' => [
-            'message' => 'Al parecer esta categoría aún no cuenta con recetas publicadas, atrévete a ser el primero en hacerlo, tal vez seas un gran chef!'
         ],
     ],
 
