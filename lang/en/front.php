@@ -3,9 +3,15 @@
 return [
     'navigation' => [
         'recipes' => 'My Recipes',
+        'favorites' => 'My Favorites',
+        'new-recipe' => 'New Recipe',
     ],
 
     'recipes' => [
+        'index' => [
+            'title' => 'My Recipes',
+            'empty' => 'Apparently you have no recipes currently published. We encourage you to create one and then publish it.',
+        ],
         'show' => [
             'ingredients' => [
                 'title' => 'Ingredients',
@@ -13,6 +19,7 @@ return [
             'preparation' => [
                 'title' => 'Preparation',
             ],
+            'favorites' => 'Favorites',
         ],
         'category-show' => [
             'title' => 'Recipes with the category',
@@ -30,6 +37,10 @@ return [
             'title' => 'Recipes with the term',
             'empty' => 'There seems to be no results for your search, please try another term.',
         ],
+        'favorite-show' => [
+            'title' => 'My Favorite Recipes',
+            'empty' => 'Looks like you don\'t have any favorite recipes yet, check the main page to find them.',
+        ],
     ],
 
     'components' => [
@@ -46,6 +57,9 @@ return [
         ],
         'recent-recipes-section' => [
             'title' => 'Recent Recipes'
+        ],
+        'popular-recipes-section' => [
+            'title' => 'Popular Recipes'
         ],
         'tags-card' => [
             'title' => 'Tags',

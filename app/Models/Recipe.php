@@ -86,9 +86,20 @@ class Recipe extends Model
             ->withTimestamps();
     }
 
+    public function favorites(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'recipe_id', 'user_id')
+            ->withTimestamps();
+    }
+
     public function newEloquentBuilder($query): RecipeBuilder
     {
         return new RecipeBuilder($query);
+    }
+
+    public function isFavorite(int $id): bool
+    {
+        return $this->favorites()->where('user_id', $id)->exists();
     }
 
     public function isPublished(): bool

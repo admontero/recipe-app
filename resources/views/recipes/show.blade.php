@@ -75,11 +75,23 @@
                 </div>
             </div>
 
-            <hr>
+            @auth
+                <hr>
 
-            <div class="d-flex justify-content-center text-center">
-                Like Me
-            </div>
+                <div class="text-center">
+                    <form class="position-relative" action="{{ route('recipes.favorite', $recipe) }}" id="favoriteForm">
+                        <button
+                            class="favorite-btn {{ $recipe->isFavorite(auth()->id()) ? 'favorite-active' : '' }}"
+                            id="favoriteBtn"
+                        ></button>
+                        <div class="position-absolute w-100" style="bottom: -.75rem;">
+                            <p>
+                                <span id="favoriteCount" class="fw-bold me-1">{{ $recipe->favorites_count }} </span> {{ __('front.recipes.show.favorites') }}
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            @endauth
         </div>
 
         <div class="col-lg-4">
@@ -94,4 +106,35 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            const _token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            const favoriteForm = document.querySelector('#favoriteForm');
+            const favoriteBtn = document.querySelector('#favoriteBtn');
+            const favoriteCount = document.querySelector('#favoriteCount');
+
+            favoriteForm.addEventListener('submit', function (event) {
+                event.preventDefault()
+
+                toggleFavorite()
+            })
+
+            const toggleFavorite = async function () {
+                await axios.post(`/recipes/${@json($recipe->slug)}/favorite`, favoriteForm, { headers: { 'X-CSRF-TOKEN': _token } })
+                    .then(response => {
+                        if (response.data.isFavorite) {
+                            favoriteBtn.classList.add('favorite-active')
+                        } else {
+                            favoriteBtn.classList.remove('favorite-active')
+                        }
+
+                        favoriteCount.textContent = response.data.count
+                    }).catch(error => {
+                        console.log(error)
+                    })
+            }
+        </script>
+    @endpush
 </x-app-front-layout>

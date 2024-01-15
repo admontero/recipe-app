@@ -11,11 +11,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-                {{-- <x-nav-link href="{{ route('back.dashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
-                </x-nav-link> --}}
-
                 @admin
+                    <x-nav-link href="{{ route('back.dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+
                     <x-nav-link href="{{ route('back.users.index') }}" :active="request()->routeIs('back.users.index')">
                         {{ __('modules.user.plural') }}
                     </x-nav-link>

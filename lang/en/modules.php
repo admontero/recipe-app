@@ -8,7 +8,8 @@ return [
         'index' => [
             'header' => 'Category Module',
             'title' => 'Categories',
-            'description' => 'This module shows the categories of the recipes registered in the system.',
+            'description' => 'This module shows the categories of the recipes registered.',
+            'empty' => 'There are no categories created at this point.',
         ],
 
         'create' => [
@@ -63,6 +64,7 @@ return [
             'header' => 'Recipe Module',
             'title' => 'Recipes',
             'description' => 'This module shows the recipes registered in the system.',
+            'empty' => 'There are no recipes created at this point.',
         ],
 
         'create' => [
@@ -102,6 +104,7 @@ return [
             'header' => 'User Module',
             'title' => 'Users',
             'description' => 'This module shows the users registered in the system.',
+            'empty' => 'There are no users created at this point.',
         ],
 
         'create' => [

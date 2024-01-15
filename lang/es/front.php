@@ -3,9 +3,15 @@
 return [
     'navigation' => [
         'recipes' => 'Mis Recetas',
+        'favorites' => 'Mis Favoritas',
+        'new-recipe' => 'Crear Receta',
     ],
 
     'recipes' => [
+        'index' => [
+            'title' => 'Mis Recetas',
+            'empty' => 'Al parecer no tienes recetas publicadas actualmente. Anímate a crear una para luego publicarla.',
+        ],
         'show' => [
             'ingredients' => [
                 'title' => 'Ingredientes',
@@ -13,6 +19,7 @@ return [
             'preparation' => [
                 'title' => 'Preparación',
             ],
+            'favorites' => 'Favoritos',
         ],
         'category-show' => [
             'title' => 'Recetas con la categoría',
@@ -30,6 +37,10 @@ return [
             'title' => 'Recetas con el término',
             'empty' => 'Parece que no hay resultados para su búsqueda, por favor intente con otro término.',
         ],
+        'favorite-show' => [
+            'title' => 'Mis Recetas Favoritas',
+            'empty' => 'Parece que no tienes recetas favoritas aún, revisa la página principal para encontrarlas.',
+        ],
     ],
 
     'components' => [
@@ -46,6 +57,9 @@ return [
         ],
         'recent-recipes-section' => [
             'title' => 'Recetas Recientes'
+        ],
+        'popular-recipes-section' => [
+            'title' => 'Recetas Populares'
         ],
         'tags-card' => [
             'title' => 'Etiquetas',

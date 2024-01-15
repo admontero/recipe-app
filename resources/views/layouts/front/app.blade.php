@@ -14,6 +14,8 @@
         <!-- Icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/7.1.0/css/flag-icons.min.css" integrity="sha512-bZBu2H0+FGFz/stDN/L0k8J0G8qVsAL0ht1qg5kTwtAheiXwiRKyCq1frwfbSFSJN3jooR5kauE0YjtPzhZtJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         <!-- Scripts -->
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -21,7 +23,7 @@
     </head>
     <body class="bg-body-tertiary">
         <div id="app">
-            <nav class="navbar navbar-expand-md navbar-dark shadow-sm bg-success">
+            <nav class="navbar navbar-expand-md navbar-dark shadow-sm bg-success" style="z-index: 1021;">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Recipe') }}
@@ -34,13 +36,38 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a href="{{ route('back.recipes.index') }}" class="nav-link mr-4">{{ __('front.navigation.recipes') }}</a>
-                            </li>
+                            @auth
+                                <li class="nav-item">
+                                    <a href="{{ route('recipes.favorite.show') }}" class="nav-link">{{ __('front.navigation.favorites') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('recipes.index') }}" class="nav-link">{{ __('front.navigation.recipes') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('back.recipes.create') }}" class="nav-link">{{ __('front.navigation.new-recipe') }}</a>
+                                </li>
+                            @endauth
                         </ul>
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown me-2">
+                                <a id="navbarDropdown2" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="fi fi-{{ config('languages')[App::getLocale()]['icon'] ?? '' }}"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown2">
+                                    @foreach (config('languages') as $key => $language)
+                                        @if ($key !== App::getLocale())
+                                            <a class="dropdown-item" href="{{ route('language.switch', ['language' => $key ]) }}">
+                                                <span class="fi fi-{{ $language['icon'] }} me-2"></span>
+                                                {{ __($language['display']) }}
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </li>
+
                             <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">

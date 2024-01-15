@@ -8,7 +8,8 @@ return [
         'index' => [
             'header' => 'Módulo de Categorías',
             'title' => 'Categorías',
-            'description' => 'En este módulo se muestran las categorías de las recetas registradas en el sistema.',
+            'description' => 'En este módulo se muestran las categorías de las recetas registradas.',
+            'empty' => 'No hay categorías creadas hasta este momento.',
         ],
 
         'create' => [
@@ -63,6 +64,7 @@ return [
             'header' => 'Módulo de Recetas',
             'title' => 'Recetas',
             'description' => 'En este módulo se muestran las recetas registradas en el sistema.',
+            'empty' => 'No hay recetas creadas hasta este momento.',
         ],
 
         'create' => [
@@ -102,6 +104,7 @@ return [
             'header' => 'Módulo de Usuarios',
             'title' => 'Usuarios',
             'description' => 'En este módulo se muestran los usuarios registrados en el sistema.',
+            'empty' => 'No hay usuarios creados hasta este momento.',
         ],
 
         'create' => [

@@ -38,67 +38,74 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
-                        <tr>
-                            <td scope="row">
-                                {{ $user->name }}
-                            </td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-                                @if ($user->isAdmin())
-                                    <span class="badge bg-warning text-black">Admin</span>
-                                @else
-                                    <span class="badge bg-light text-dark">User</span>
-                                @endif
-                            </td>
-                            <td>
-                                <div class="btn-group dropend">
-                                    <x-button type="submit" id="dropdownButton" class="btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{ __('Actions') }}
-                                    </x-button>
-                                    <ul class="dropdown-menu position-fixed">
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('back.users.edit', $user) }}">{{ __('Edit') }}</a>
-                                        </li>
-                                        <li>
-                                            <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteUser{{ $user->id }}">
-                                                {{ __('Delete') }}
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!-- Delete Modal -->
-                                <div class="modal fade" id="deleteUser{{ $user->id }}" tabindex="-1" aria-labelledby="deleteUser{{ $user->id }}Label" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div>
-                                                    {{ __('modules.user.delete.description') }}
-                                                    <span class="fw-bold">{{ $user->email }}</span>.
+                    @if ($users->count())
+                        @foreach ($users as $user)
+                            <tr>
+                                <td scope="row">
+                                    {{ $user->name }}
+                                </td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    @if ($user->isAdmin())
+                                        <span class="badge bg-warning text-black">Admin</span>
+                                    @else
+                                        <span class="badge bg-light text-dark">User</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="btn-group dropend">
+                                        <x-button type="submit" id="dropdownButton" class="btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {{ __('Actions') }}
+                                        </x-button>
+                                        <ul class="dropdown-menu position-fixed">
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('back.users.edit', $user) }}">{{ __('Edit') }}</a>
+                                            </li>
+                                            <li>
+                                                <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteUser{{ $user->id }}">
+                                                    {{ __('Delete') }}
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="deleteUser{{ $user->id }}" tabindex="-1" aria-labelledby="deleteUser{{ $user->id }}Label" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <form id="deleteUser{{ $user->id }}Form" method="post" action="{{ route('back.users.destroy', $user) }}" class="p-6">
-                                                    @csrf
-                                                    @method('delete')
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                    {{ __('Cancel') }}
-                                                </button>
-                                                <button type="submit" class="btn btn-danger" form="deleteUser{{ $user->id }}Form">
-                                                    {{ __('modules.user.delete.action') }}
-                                                </button>
+                                                <div class="modal-body">
+                                                    <div>
+                                                        {{ __('modules.user.delete.description') }}
+                                                        <span class="fw-bold">{{ $user->email }}</span>.
+                                                    </div>
+                                                    <form id="deleteUser{{ $user->id }}Form" method="post" action="{{ route('back.users.destroy', $user) }}" class="p-6">
+                                                        @csrf
+                                                        @method('delete')
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                        {{ __('Cancel') }}
+                                                    </button>
+                                                    <button type="submit" class="btn btn-danger" form="deleteUser{{ $user->id }}Form">
+                                                        {{ __('modules.user.delete.action') }}
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- Delete Modal -->
-                            </td>
+                                    <!-- Delete Modal -->
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td class="fst-italic text-center" colspan="4">{{ __('modules.user.index.empty') }}</td>
                         </tr>
-                    @endforeach
+                    @endif
+
                 </tbody>
             </table>
         </div>

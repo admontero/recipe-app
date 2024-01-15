@@ -7,6 +7,8 @@
         <div class="container">
             <x-recent-recipes-section />
 
+            <x-popular-recipes-section />
+
             <x-categories-recipes-section />
         </div>
     </div>

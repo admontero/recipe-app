@@ -41,3 +41,42 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
 }
+
+.favorite-btn{
+    display: inline-block;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    border: none;
+    outline: none;
+}
+
+.favorite-btn {
+    background: url('https://i.ibb.co/vw78mf3/heart.png') no-repeat 0% 50%;
+    background-size: 2900%;
+}
+
+.favorite-active {
+    animation-name: animate;
+    animation-duration: .8s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.favorite-active {
+    animation-timing-function: steps(28);
+}
+
+@keyframes animate {
+    0% {
+        background-position: left;
+    }
+
+    50% {
+        background-position: right;
+    }
+
+    100% {
+        background-position: right;
+    }
+}

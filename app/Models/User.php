@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -44,9 +46,18 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
-    public function recipes()
+    public function recipes(): HasMany
     {
         return $this->hasMany(Recipe::class);
+    }
+
+    public function favorites(): BelongsToMany
+    {
+        return $this->belongsToMany(Recipe::class, 'favorites', 'user_id', 'recipe_id')
+            ->select(['recipes.id', 'recipes.title', 'recipes.slug', 'recipes.excerpt', 'recipes.image', 'recipes.published_at', 'recipes.category_id', 'recipes.user_id'])
+            ->with('user:id,name', 'category:id,name,slug')
+            ->orderByPivot('created_at', 'DESC')
+            ->withTimestamps();
     }
 
     public function isAdmin(): bool
