@@ -52,7 +52,7 @@
 
 @push('scripts')
     <script>
-        window.addEventListener('load', function () {
+        document.addEventListener('DOMContentLoaded', function () {
             var tomSelectCategory = new TomSelect('#selectCategory', {
                 create: false,
                 sortField: {

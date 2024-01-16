@@ -58,7 +58,7 @@
 
 @push('scripts')
     <script>
-        window.addEventListener('load', function() {
+        document.addEventListener('DOMContentLoaded', function() {
             if ({{ count($errors->userDeletion) }}) {
                 var myModal = new bootstrap.Modal(document.getElementById('deleteAccountModal'), {
                     keyboard: false

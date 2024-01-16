@@ -163,7 +163,7 @@
         <script src="https://cdn.jsdelivr.net/npm/quill-image-resize@3.0.9/image-resize.min.js"></script>
 
         <script>
-            window.addEventListener('load', function () {
+            document.addEventListener('DOMContentLoaded', function () {
                 Quill.register('modules/imageResize', ImageResize.default);
 
                 var flatpickrPublishedAt = flatpickr('#published_at', {

@@ -26,11 +26,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('back.dashboard');
-})->middleware(['auth', 'verified', 'admin'])->name('back.dashboard');
+Route::name('back.')->prefix('back')->middleware(['auth', 'admin', 'verified'])->group(function () {
+    Route::get('/dashboard', function () { return view('back.dashboard'); });
 
-Route::name('back.')->prefix('back')->middleware('auth')->group(function () {
+    Route::resource('categories', CategoryController::class)->except('show');
+
+    Route::post('categories/{id}/restore', [CategoryController::class, 'restore'])
+        ->name('categories.restore');
+
+    Route::resource('users', UserController::class);
+});
+
+Route::name('back.')->prefix('back')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
 
@@ -43,14 +50,6 @@ Route::name('back.')->prefix('back')->middleware('auth')->group(function () {
     Route::resource('recipes', RecipeController::class)->except('show');
 });
 
-Route::name('back.')->prefix('back')->middleware(['auth', 'admin'])->group(function () {
-    Route::resource('categories', CategoryController::class)->except('show');
-
-    Route::post('categories/{id}/restore', [CategoryController::class, 'restore'])
-        ->name('categories.restore');
-
-    Route::resource('users', UserController::class);
-});
 
 Route::get('/', PageController::class);
 

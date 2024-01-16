@@ -107,34 +107,38 @@
         </div>
     </div>
 
-    @push('scripts')
-        <script>
-            const _token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    @auth
+        @push('scripts')
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const _token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            const favoriteForm = document.querySelector('#favoriteForm');
-            const favoriteBtn = document.querySelector('#favoriteBtn');
-            const favoriteCount = document.querySelector('#favoriteCount');
+                    const favoriteForm = document.querySelector('#favoriteForm');
+                    const favoriteBtn = document.querySelector('#favoriteBtn');
+                    const favoriteCount = document.querySelector('#favoriteCount');
 
-            favoriteForm.addEventListener('submit', function (event) {
-                event.preventDefault()
+                    favoriteForm.addEventListener('submit', function (event) {
+                        event.preventDefault()
 
-                toggleFavorite()
-            })
-
-            const toggleFavorite = async function () {
-                await axios.post(`/recipes/${@json($recipe->slug)}/favorite`, favoriteForm, { headers: { 'X-CSRF-TOKEN': _token } })
-                    .then(response => {
-                        if (response.data.isFavorite) {
-                            favoriteBtn.classList.add('favorite-active')
-                        } else {
-                            favoriteBtn.classList.remove('favorite-active')
-                        }
-
-                        favoriteCount.textContent = response.data.count
-                    }).catch(error => {
-                        console.log(error)
+                        toggleFavorite()
                     })
-            }
-        </script>
-    @endpush
+
+                    const toggleFavorite = async function () {
+                        await axios.post(`/recipes/${@json($recipe->slug)}/favorite`, favoriteForm, { headers: { 'X-CSRF-TOKEN': _token } })
+                            .then(response => {
+                                if (response.data.isFavorite) {
+                                    favoriteBtn.classList.add('favorite-active')
+                                } else {
+                                    favoriteBtn.classList.remove('favorite-active')
+                                }
+
+                                favoriteCount.textContent = response.data.count
+                            }).catch(error => {
+                                console.log(error)
+                            })
+                    }
+                })
+            </script>
+        @endpush
+    @endauth
 </x-app-front-layout>
