@@ -53,7 +53,7 @@
                                 <td>{{ $category->slug }}</td>
                                 <td class="">
                                     <div class="btn-group dropend">
-                                        <x-button type="submit" id="dropdownButton" class="btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <x-button class="btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                             {{ __('Actions') }}
                                         </x-button>
                                         <ul class="dropdown-menu position-fixed">

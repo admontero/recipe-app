@@ -5,9 +5,9 @@
             <a class="text-success" href="{{ route('recipes.category.show', $category) }}">{{ __('front.components.categories-recipes-section.anchor') }}</a>
         </div>
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 {{ ! $loop->last ? 'mb-4' : '' }}">
             @foreach ($category->recipes as $recipe)
-                <div class="col mb-4">
+                <div class="col">
                     <x-recipe-card :$recipe :showCategoryLabel="false" />
                 </div>
             @endforeach

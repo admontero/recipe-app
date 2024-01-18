@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 
@@ -30,8 +31,10 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
-        $recipe->loadCount('favorites');
-
-        return view('recipes.show', compact('recipe'));
+        $recipe->loadCount(['favorites', 'comments']);
+        
+        return view('recipes.show', [
+            'recipe' => $recipe,
+        ]);
     }
 }

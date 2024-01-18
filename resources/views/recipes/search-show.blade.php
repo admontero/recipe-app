@@ -2,7 +2,7 @@
     <div class="album">
         <div class="row">
             <div class="col-lg-8">
-                <h3 class="mb-4">
+                <h3 class="mb-0">
                     {{ __('front.recipes.search-show.title') }}:
                     <span class="text-success">
                         {{ request()->title }}
@@ -39,7 +39,7 @@
 
                     <x-recipe-search-card />
 
-                    <x-categories-card />
+                    <x-categories-card :categories="$categoriesWithRecipesCount" />
                 </div>
             </div>
         </div>

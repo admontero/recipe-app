@@ -182,7 +182,8 @@ return [
         'preparation' => 'preparación',
         'image' => 'imagen',
         'published_at' => 'fecha de publicación',
-        'tags.*' => 'etiqueta #:position'
+        'tags.*' => 'etiqueta #:position',
+        'body' => 'comentario',
     ],
 
 ];

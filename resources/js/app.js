@@ -20,3 +20,15 @@ window.Quill = Quill;
 import flatpickr from 'flatpickr';
 
 window.flatpickr = flatpickr;
+
+import * as numerous from 'numerous';
+
+window.numerous = numerous;
+
+import enLocale from 'numerous/locales/en';
+import esLocale from 'numerous/locales/es';
+
+numerous.registerLocale([
+    enLocale,
+    esLocale,
+]);

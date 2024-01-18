@@ -41,6 +41,37 @@ return [
         ]
     ],
 
+    'comment' => [
+        'singular' => 'Comment',
+        'plural' => 'Comments',
+        'choice' => 'Comment|Comments',
+
+        'index' => [
+            'empty' => 'There are no comments yet.',
+        ],
+
+        'create' => [
+            'login' => ':login to comment or :register if you don\'t have an account yet.',
+            'placeholder' => 'What do you think about this recipe?',
+            'button' => 'Send Comment',
+        ],
+
+        'edit' => [
+            'title' => 'Update Comment',
+        ],
+
+        'delete' => [
+            'description' => 'Are you sure you want to delete the comment?',
+            'action' => 'Delete Comment',
+        ],
+    ],
+
+    'favorite' => [
+        'singular' => 'Favorite',
+        'plural' => 'Favorites',
+        'choice' => 'Favorite|Favorites',
+    ],
+
     'profile' => [
         'edit' => [
             'alert' => 'The profile has been saved successfully.',

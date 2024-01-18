@@ -4,6 +4,7 @@ use App\Http\Controllers\Back\CategoryController;
 use App\Http\Controllers\Back\ProfileController;
 use App\Http\Controllers\Back\RecipeController;
 use App\Http\Controllers\Back\UserController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RecipeCategoryController;
 use App\Http\Controllers\RecipeController as RecipeFrontController;
@@ -26,8 +27,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('language/switch', SwitchLanguageController::class)
+    ->name('language.switch');
+
 Route::name('back.')->prefix('back')->middleware(['auth', 'admin', 'verified'])->group(function () {
-    Route::get('/dashboard', function () { return view('back.dashboard'); });
+    Route::get('dashboard', function () { return view('back.dashboard'); })
+        ->name('dashboard');
 
     Route::resource('categories', CategoryController::class)->except('show');
 
@@ -53,26 +58,46 @@ Route::name('back.')->prefix('back')->middleware(['auth', 'verified'])->group(fu
 
 Route::get('/', PageController::class);
 
-Route::get('recipes/search', RecipeSearchController::class)->name('recipes.search');
+Route::get('recipes/search', RecipeSearchController::class)
+    ->name('recipes.search');
 
 Route::middleware('auth')->group(function () {
-    Route::get('recipes', [RecipeFrontController::class, 'index'])->name('recipes.index');
+    Route::get('recipes', [RecipeFrontController::class, 'index'])
+        ->name('recipes.index');
 
-    Route::get('recipes/favorites', RecipeFavoriteController::class)->name('recipes.favorite.show');
+    Route::get('recipes/favorites', RecipeFavoriteController::class)
+        ->name('recipes.favorite.show');
+
+    Route::resource('comments', CommentController::class)->except('show');
 });
 
-Route::get('recipes/{recipe}', [RecipeFrontController::class, 'show'])->name('recipes.show');
+Route::get('recipes/{recipe}', [RecipeFrontController::class, 'show'])
+    ->name('recipes.show');
 
-Route::get('categories/{category}/recipes', RecipeCategoryController::class)->name('recipes.category.show');
+Route::get('categories/{category}/recipes', RecipeCategoryController::class)
+    ->name('recipes.category.show');
 
-Route::get('tags/{tag}/recipes', RecipeTagController::class)->name('recipes.tag.show');
+Route::get('tags/{tag}/recipes', RecipeTagController::class)
+    ->name('recipes.tag.show');
 
-Route::get('users/{user}/recipes', RecipeUserController::class)->name('recipes.user.show');
+Route::get('users/{user}/recipes', RecipeUserController::class)
+    ->name('recipes.user.show');
 
-Route::get('language/switch', SwitchLanguageController::class)->name('language.switch');
+Route::get('recipes/{recipe}/comments', [CommentController::class, 'index'])
+    ->name('recipes.comments.index');
 
 Route::middleware('auth')->group(function () {
-    Route::post('recipes/{recipe}/favorite', ToggleFavoriteController::class)->name('recipes.favorite');
+    Route::post('recipes/{recipe}/favorites', ToggleFavoriteController::class)
+        ->name('recipes.favorites');
+
+    Route::post('recipes/{recipe}/comments', [CommentController::class, 'store'])
+        ->name('recipes.comments.store');
+
+    Route::delete('recipes/{recipe}/comments/{comment}', [CommentController::class, 'destroy'])
+        ->name('recipes.comments.destroy');
+
+    Route::put('recipes/{recipe}/comments/{comment}', [CommentController::class, 'update'])
+        ->name('recipes.comments.update');
 });
 
 require __DIR__.'/auth.php';

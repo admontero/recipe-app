@@ -2,18 +2,18 @@
 
 namespace App\View\Components;
 
+use App\Models\Recipe;
 use Closure;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
-class RecentRecipesSection extends Component
+class CommentsSection extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public Collection $recipes
+        public Recipe $recipe,
     )
     {
         //
@@ -24,6 +24,6 @@ class RecentRecipesSection extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.recent-recipes-section');
+        return view('components.comments-section');
     }
 }

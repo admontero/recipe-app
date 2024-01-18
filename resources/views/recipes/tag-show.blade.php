@@ -2,7 +2,10 @@
     <div class="album">
         <div class="row">
             <div class="col-lg-8">
-                <h3 class="mb-4">{{ __('front.recipes.tag-show.title') }}: <span class="text-success text-capitalize">{{ $tag->name }}</span></h3>
+                <h3 class="mb-0">
+                    {{ __('front.recipes.tag-show.title') }}:
+                    <span class="text-success text-capitalize">{{ $tag->name }}</span>
+                </h3>
 
                 <hr>
 
@@ -30,7 +33,7 @@
 
                     <x-recipe-search-card />
 
-                    <x-categories-card />
+                    <x-categories-card :categories="$categoriesWithRecipesCount" />
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@
 
         @stack('styles')
     </head>
-    <body class="bg-body-tertiary">
+    <body class="bg-body-tertiary d-flex flex-column min-vh-100 ">
         <div id="app">
             <nav class="navbar navbar-expand-md navbar-dark shadow-sm bg-success" style="z-index: 1021;">
                 <div class="container">
@@ -112,6 +112,15 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <footer class="mt-auto bg-success py-2">
+            <div class="container d-flex justify-content-between align-items-center">
+                <a class="text-white text-decoration-none fs-4" href="{{ url('/') }}">
+                    {{ config('app.name', 'Recipe') }}
+                </a>
+                <p class="text-white mb-0 fw-light">{{ now()->format('Y') }}</p>
+            </div>
+        </footer>
 
         @stack('scripts')
     </body>

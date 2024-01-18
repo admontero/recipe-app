@@ -19,7 +19,6 @@ return [
             'preparation' => [
                 'title' => 'Preparation',
             ],
-            'favorites' => 'Favorites',
         ],
         'category-show' => [
             'title' => 'Recipes with the category',

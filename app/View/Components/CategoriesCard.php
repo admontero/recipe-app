@@ -2,9 +2,9 @@
 
 namespace App\View\Components;
 
-use App\Models\Category;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
 class CategoriesCard extends Component
@@ -12,7 +12,9 @@ class CategoriesCard extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(
+        public Collection $categories
+    )
     {
         //
     }
@@ -22,21 +24,6 @@ class CategoriesCard extends Component
      */
     public function render(): View|Closure|string
     {
-        $categories = Category::with([
-            'recipes' => function ($recipes) {
-                $recipes->published();
-            }
-        ])
-        ->withCount(['recipes' => function ($query) {
-            $query->published();
-        }])
-        ->having('recipes_count', '>', 0)
-        ->orderBy('recipes_count', 'DESC')
-        ->take(5)
-        ->get();
-
-        return view('components.categories-card', [
-            'categories' => $categories,
-        ]);
+        return view('components.categories-card');
     }
 }

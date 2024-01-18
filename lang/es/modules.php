@@ -41,6 +41,37 @@ return [
         ],
     ],
 
+    'comment' => [
+        'singular' => 'Comentario',
+        'plural' => 'Comentarios',
+        'choice' => 'Comentario|Comentarios',
+
+        'index' => [
+            'empty' => 'Aún no hay comentarios.',
+        ],
+
+        'create' => [
+            'login' => ':login para comentar o :register si aún no tienes cuenta.',
+            'placeholder' => '¿Qué piensas de esta receta?',
+            'button' => 'Enviar Comentario',
+        ],
+
+        'edit' => [
+            'title' => 'Editar Comentario',
+        ],
+
+        'delete' => [
+            'description' => '¿Está seguro de que desea eliminar el comentario?',
+            'action' => 'Eliminar Comentario',
+        ],
+    ],
+
+    'favorite' => [
+        'singular' => 'Favorito',
+        'plural' => 'Favoritos',
+        'choice' => 'Favorito|Favoritos',
+    ],
+
     'profile' => [
         'edit' => [
             'alert' => 'El perfil se ha guardado correctamente.',

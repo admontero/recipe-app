@@ -1,5 +1,5 @@
-<div class="bg-white text-success p-4 rounded-3 shadow-sm">
-    <h4>{{ __('front.components.categories-card.title') }}</h4>
+<div class="card p-4 shadow-sm">
+    <h4 class="mb-0">{{ __('front.components.categories-card.title') }}</h4>
 
     <hr>
 
