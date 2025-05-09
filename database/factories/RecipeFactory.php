@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Smknstd\FakerPicsumImages\FakerPicsumImagesProvider;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Recipe>
@@ -26,7 +27,7 @@ class RecipeFactory extends Factory
             'preparation' => fake()->realText(),
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
-            'image' => 'recipes/' . fake()->image('public/storage/recipes/', 400, 300, 'recipes', false, true, 'food', true),
+            'image' => 'recipes/' . FakerPicsumImagesProvider::image('public/storage/recipes', 400, 300, false),
             'published_at' => fake()->dateTimeThisMonth(),
         ];
     }
