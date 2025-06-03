@@ -60,7 +60,7 @@ class Recipe extends Model
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: fn () => asset('storage/' . $this->image),
+            get: fn () => $this->image ? asset("storage/{$this->image}") : 'https://placehold.co/400x300',
         );
     }
 

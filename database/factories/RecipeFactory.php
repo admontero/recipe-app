@@ -27,9 +27,18 @@ class RecipeFactory extends Factory
             'preparation' => fake()->realText(),
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
-            'image' => 'recipes/' . FakerPicsumImagesProvider::image('public/storage/recipes', 400, 300, false),
             'published_at' => fake()->dateTimeThisMonth(),
         ];
+    }
+    public function withImage(): static
+    {
+        $image = FakerPicsumImagesProvider::image('public/storage/recipes', 400, 300, false);
+
+        $path = $image ? "recipes/{$image}" : null;
+
+        return $this->state(fn (array $attributes) => [
+            'image' => $path,
+        ]);
     }
 
     public function existing(): static

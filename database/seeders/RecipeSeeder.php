@@ -17,6 +17,8 @@ class RecipeSeeder extends Seeder
         Storage::deleteDirectory('public/recipes');
         Storage::makeDirectory('public/recipes');
 
-        Recipe::factory(20)->existing()->create();
+        Recipe::factory(20)
+            ->existing()
+            ->create();
     }
 }
